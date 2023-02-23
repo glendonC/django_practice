@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [
 
     #sends user to views.py index function
-    path('', views.index),
-    path('add/', views.add),
+    path('', views.index, name='home'),
+    path('add/', views.add, name='add'),
 ]
