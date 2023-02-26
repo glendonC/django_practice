@@ -124,5 +124,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Redirects to home page
+
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login'

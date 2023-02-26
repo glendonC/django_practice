@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Entry
 from .forms import EntryForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,6 +16,10 @@ def index(request):
     entries = Entry.objects.order_by('-date_posted')
     context = {'entries': entries, 'username': username}
     return render(request, 'entries/index.html', context)
+
+@login_required
+def profile(request):
+    return render(request, 'registration/profile.html')
 
 def add(request):
 
