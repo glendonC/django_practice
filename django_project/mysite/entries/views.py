@@ -4,6 +4,7 @@ from .forms import EntryForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from .forms import ExtendedUserCreationForm
 
 # Create your views here.
 
@@ -25,7 +26,7 @@ def profile(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = ExtendedUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username=form.cleaned_data.get('username')
@@ -35,7 +36,7 @@ def register(request):
 
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = ExtendedUserCreationForm()
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
