@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Entry
+from .forms import EntryForm
 
 # Create your views here.
 
@@ -10,4 +11,6 @@ def index(request):
     return render(request, 'entries/index.html', context)
 
 def add(request):
-    return render(request, 'entries/add.html')
+    form = EntryForm()
+    context = {'form':form}
+    return render(request, 'entries/add.html', context)
