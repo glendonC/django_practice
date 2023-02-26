@@ -6,8 +6,14 @@ from .forms import EntryForm
 
 #pass name of the template
 def index(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = 'not logged in'
+
+
     entries = Entry.objects.order_by('-date_posted')
-    context = {'entries': entries}
+    context = {'entries': entries, 'username': username}
     return render(request, 'entries/index.html', context)
 
 def add(request):
