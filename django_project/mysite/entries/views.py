@@ -4,7 +4,8 @@ from .forms import EntryForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import ExtendedUserCreationForm, UserProfileForm
-
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 #pass name of the template
@@ -22,6 +23,11 @@ def index(request):
 @login_required
 def profile(request):
     return render(request, 'registration/profile.html')
+
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'registration/profile.html')
+
 
 def add(request):
 
