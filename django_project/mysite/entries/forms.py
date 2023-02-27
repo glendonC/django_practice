@@ -1,8 +1,9 @@
-from django.forms import ModelForm
-from .models import Entry
 from django import forms
+from .models import Entry
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
+from .models import UserProfile
 
 
 class EntryForm(ModelForm):
@@ -27,6 +28,7 @@ class ExtendedUserCreationForm(UserCreationForm):
     
     def save(self, commit=True):
         user = super().save(commit=False)
+
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -34,3 +36,8 @@ class ExtendedUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model=UserProfile
+        fields = ('location', 'age')
